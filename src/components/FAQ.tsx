@@ -10,7 +10,7 @@ import { HelpCircle } from "lucide-react";
 
 const FAQ = () => {
   return (
-    <Card className="shadow-lg transition-all duration-300 hover:shadow-xl overflow-hidden border-t-4 border-t-primary">
+    <Card className="shadow-lg transition-all duration-300 hover:shadow-xl overflow-hidden border-t-4 border-t-primary bg-gradient-to-br from-purple-50 to-purple-100/50 dark:from-purple-950/20 dark:to-purple-900/10">
       <div className="p-6">
         <div className="flex items-center gap-3 mb-6">
           <div className="bg-purple-100 dark:bg-purple-900/30 p-2 rounded-lg">
@@ -20,7 +20,7 @@ const FAQ = () => {
         </div>
         
         <Accordion type="single" collapsible className="w-full space-y-4">
-          <AccordionItem value="item-1" className="border px-4 rounded-lg overflow-hidden border-l-[3px] border-l-blue-500">
+          <AccordionItem value="item-1" className="border px-4 rounded-lg overflow-hidden border-l-[3px] border-l-blue-500 shadow-sm bg-background/80">
             <AccordionTrigger className="text-lg font-medium py-4 hover:no-underline">
               Is the EMI amount fixed throughout the loan tenure?
             </AccordionTrigger>
@@ -29,7 +29,7 @@ const FAQ = () => {
             </AccordionContent>
           </AccordionItem>
           
-          <AccordionItem value="item-2" className="border px-4 rounded-lg overflow-hidden border-l-[3px] border-l-green-500">
+          <AccordionItem value="item-2" className="border px-4 rounded-lg overflow-hidden border-l-[3px] border-l-green-500 shadow-sm bg-background/80">
             <AccordionTrigger className="text-lg font-medium py-4 hover:no-underline">
               How do prepayments affect my loan?
             </AccordionTrigger>
@@ -38,7 +38,7 @@ const FAQ = () => {
             </AccordionContent>
           </AccordionItem>
           
-          <AccordionItem value="item-3" className="border px-4 rounded-lg overflow-hidden border-l-[3px] border-l-red-500">
+          <AccordionItem value="item-3" className="border px-4 rounded-lg overflow-hidden border-l-[3px] border-l-red-500 shadow-sm bg-background/80">
             <AccordionTrigger className="text-lg font-medium py-4 hover:no-underline">
               What happens if I miss an EMI payment?
             </AccordionTrigger>
@@ -47,7 +47,7 @@ const FAQ = () => {
             </AccordionContent>
           </AccordionItem>
           
-          <AccordionItem value="item-4" className="border px-4 rounded-lg overflow-hidden border-l-[3px] border-l-emerald-500">
+          <AccordionItem value="item-4" className="border px-4 rounded-lg overflow-hidden border-l-[3px] border-l-emerald-500 shadow-sm bg-background/80">
             <AccordionTrigger className="text-lg font-medium py-4 hover:no-underline">
               Can I increase my EMI amount later?
             </AccordionTrigger>

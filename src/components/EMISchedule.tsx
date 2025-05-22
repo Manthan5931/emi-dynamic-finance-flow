@@ -171,16 +171,16 @@ const EMISchedule = ({ data }: EMIScheduleProps) => {
           <Table>
             <TableHeader className="bg-muted/50 sticky top-0 z-10">
               <TableRow>
-                <TableHead className="w-[80px]">Month</TableHead>
-                <TableHead>Date</TableHead>
-                <TableHead className="text-right">EMI</TableHead>
-                <TableHead className="text-right">Principal</TableHead>
-                <TableHead className="text-right">Interest</TableHead>
+                <TableHead className="w-[120px] min-w-[120px]">Month</TableHead>
+                <TableHead className="min-w-[120px]">Date</TableHead>
+                <TableHead className="text-right min-w-[120px]">EMI</TableHead>
+                <TableHead className="text-right min-w-[120px]">Principal</TableHead>
+                <TableHead className="text-right min-w-[120px]">Interest</TableHead>
                 {data.schedule.some((item: any) => item.prepayment > 0) && (
-                  <TableHead className="text-right">Prepayment</TableHead>
+                  <TableHead className="text-right min-w-[120px]">Prepayment</TableHead>
                 )}
-                <TableHead className="text-right">Total Payment</TableHead>
-                <TableHead className="text-right">Balance</TableHead>
+                <TableHead className="text-right min-w-[120px]">Total Payment</TableHead>
+                <TableHead className="text-right min-w-[120px]">Balance</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
