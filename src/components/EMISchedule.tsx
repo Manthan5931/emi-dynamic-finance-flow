@@ -1,12 +1,13 @@
 
 import { useState } from "react";
-import { CalendarPlus, ChartBar, Download, Share } from "lucide-react";
+import { CalendarPlus, ChevronDown, ChevronUp, Download, Share } from "lucide-react";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { formatCurrency, formatPercentage } from "@/lib/emi-calculator";
 import { useToast } from "@/hooks/use-toast";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 interface EMIScheduleProps {
   data: any;
@@ -15,18 +16,75 @@ interface EMIScheduleProps {
 const EMISchedule = ({ data }: EMIScheduleProps) => {
   const { toast } = useToast();
   const [searchTerm, setSearchTerm] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 12;
+  const [expandedYears, setExpandedYears] = useState<Record<string, boolean>>({});
+  
+  // Group schedule by years
+  const groupByYear = () => {
+    const yearlyData: Record<string, any[]> = {};
+    
+    data.schedule.forEach((item: any) => {
+      const year = item.date.split(' ')[1]; // Extract year from "MMM YYYY"
+      
+      if (!yearlyData[year]) {
+        yearlyData[year] = [];
+      }
+      
+      yearlyData[year].push(item);
+    });
+    
+    return yearlyData;
+  };
+  
+  const yearlyData = groupByYear();
+  const years = Object.keys(yearlyData).sort();
+  
+  // Calculate yearly totals
+  const calculateYearlyTotals = (items: any[]) => {
+    return items.reduce((acc, item) => {
+      return {
+        emi: acc.emi + item.emi,
+        interestPayment: acc.interestPayment + item.interestPayment,
+        principalPayment: acc.principalPayment + item.principalPayment,
+        prepayment: acc.prepayment + (item.prepayment || 0),
+        totalPayment: acc.totalPayment + item.totalPayment,
+      };
+    }, { 
+      emi: 0, 
+      interestPayment: 0, 
+      principalPayment: 0, 
+      prepayment: 0, 
+      totalPayment: 0 
+    });
+  };
   
   // Filter schedule based on search term
-  const filteredSchedule = data.schedule.filter((item: any) => 
-    item.date.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filterSchedule = () => {
+    if (!searchTerm) return yearlyData;
+    
+    const filteredData: Record<string, any[]> = {};
+    
+    years.forEach(year => {
+      const filteredItems = yearlyData[year].filter((item: any) => 
+        item.date.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      
+      if (filteredItems.length > 0) {
+        filteredData[year] = filteredItems;
+      }
+    });
+    
+    return filteredData;
+  };
   
-  // Calculate pagination values
-  const totalPages = Math.ceil(filteredSchedule.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedSchedule = filteredSchedule.slice(startIndex, startIndex + itemsPerPage);
+  const filteredSchedule = filterSchedule();
+  const filteredYears = Object.keys(filteredSchedule).sort();
+  
+  const toggleYear = (year: string) => {
+    setExpandedYears(prev => ({
+      ...prev,
+      [year]: !prev[year]
+    }));
+  };
   
   const handleDownload = () => {
     let csvContent = "Month,Date,EMI Amount,Principal,Interest,Balance\n";
@@ -87,11 +145,11 @@ const EMISchedule = ({ data }: EMIScheduleProps) => {
           <span>EMI Schedule</span>
         </CardTitle>
         <div className="flex space-x-2">
-          <Button variant="outline" size="sm" onClick={handleShare}>
+          <Button variant="outline" size="sm" onClick={handleShare} className="h-8">
             <Share className="h-4 w-4 mr-1" />
             <span className="hidden sm:inline">Share</span>
           </Button>
-          <Button variant="outline" size="sm" onClick={handleDownload}>
+          <Button variant="outline" size="sm" onClick={handleDownload} className="h-8">
             <Download className="h-4 w-4 mr-1" />
             <span className="hidden sm:inline">Download</span>
           </Button>
@@ -111,32 +169,9 @@ const EMISchedule = ({ data }: EMIScheduleProps) => {
         
         <div className="overflow-x-auto">
           <Table>
-            <TableCaption>
-              <div className="flex justify-center items-center gap-2 mt-4">
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
-                  disabled={currentPage === 1}
-                >
-                  Previous
-                </Button>
-                <span className="text-sm">
-                  Page {currentPage} of {totalPages || 1}
-                </span>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
-                  disabled={currentPage === totalPages || totalPages === 0}
-                >
-                  Next
-                </Button>
-              </div>
-            </TableCaption>
-            <TableHeader className="bg-muted/50">
+            <TableHeader className="bg-muted/50 sticky top-0 z-10">
               <TableRow>
-                <TableHead>Month</TableHead>
+                <TableHead className="w-[80px]">Month</TableHead>
                 <TableHead>Date</TableHead>
                 <TableHead className="text-right">EMI</TableHead>
                 <TableHead className="text-right">Principal</TableHead>
@@ -149,21 +184,59 @@ const EMISchedule = ({ data }: EMIScheduleProps) => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {paginatedSchedule.length > 0 ? (
-                paginatedSchedule.map((item: any, index: number) => (
-                  <TableRow key={index} className={index % 2 === 0 ? "bg-background" : "bg-muted/10"}>
-                    <TableCell className="font-medium">{item.month}</TableCell>
-                    <TableCell>{item.date}</TableCell>
-                    <TableCell className="text-right">{formatCurrency(item.emi)}</TableCell>
-                    <TableCell className="text-right">{formatCurrency(item.principalPayment)}</TableCell>
-                    <TableCell className="text-right">{formatCurrency(item.interestPayment)}</TableCell>
-                    {data.schedule.some((item: any) => item.prepayment > 0) && (
-                      <TableCell className="text-right">{formatCurrency(item.prepayment)}</TableCell>
-                    )}
-                    <TableCell className="text-right">{formatCurrency(item.totalPayment)}</TableCell>
-                    <TableCell className="text-right">{formatCurrency(item.balance)}</TableCell>
-                  </TableRow>
-                ))
+              {filteredYears.length > 0 ? (
+                filteredYears.map(year => {
+                  const yearItems = filteredSchedule[year];
+                  const yearlyTotals = calculateYearlyTotals(yearItems);
+                  
+                  return (
+                    <Collapsible 
+                      key={year}
+                      open={expandedYears[year]}
+                      onOpenChange={() => toggleYear(year)}
+                      className="w-full"
+                    >
+                      <CollapsibleTrigger asChild>
+                        <TableRow className="bg-muted/20 hover:bg-muted/30 cursor-pointer font-medium">
+                          <TableCell colSpan={2} className="flex items-center">
+                            {expandedYears[year] ? 
+                              <ChevronUp className="h-4 w-4 mr-2" /> : 
+                              <ChevronDown className="h-4 w-4 mr-2" />
+                            }
+                            {year}
+                          </TableCell>
+                          <TableCell className="text-right">{formatCurrency(yearlyTotals.emi)}</TableCell>
+                          <TableCell className="text-right">{formatCurrency(yearlyTotals.principalPayment)}</TableCell>
+                          <TableCell className="text-right">{formatCurrency(yearlyTotals.interestPayment)}</TableCell>
+                          {data.schedule.some((item: any) => item.prepayment > 0) && (
+                            <TableCell className="text-right">{formatCurrency(yearlyTotals.prepayment)}</TableCell>
+                          )}
+                          <TableCell className="text-right">{formatCurrency(yearlyTotals.totalPayment)}</TableCell>
+                          <TableCell className="text-right">
+                            {formatCurrency(yearItems[yearItems.length - 1].balance)}
+                          </TableCell>
+                        </TableRow>
+                      </CollapsibleTrigger>
+                      
+                      <CollapsibleContent>
+                        {yearItems.map((item: any, index: number) => (
+                          <TableRow key={`${year}-${index}`} className={index % 2 === 0 ? "bg-background" : "bg-muted/10"}>
+                            <TableCell className="pl-9">{item.month}</TableCell>
+                            <TableCell>{item.date}</TableCell>
+                            <TableCell className="text-right">{formatCurrency(item.emi)}</TableCell>
+                            <TableCell className="text-right">{formatCurrency(item.principalPayment)}</TableCell>
+                            <TableCell className="text-right">{formatCurrency(item.interestPayment)}</TableCell>
+                            {data.schedule.some((item: any) => item.prepayment > 0) && (
+                              <TableCell className="text-right">{formatCurrency(item.prepayment)}</TableCell>
+                            )}
+                            <TableCell className="text-right">{formatCurrency(item.totalPayment)}</TableCell>
+                            <TableCell className="text-right">{formatCurrency(item.balance)}</TableCell>
+                          </TableRow>
+                        ))}
+                      </CollapsibleContent>
+                    </Collapsible>
+                  );
+                })
               ) : (
                 <TableRow>
                   <TableCell colSpan={8} className="text-center py-4">No results found</TableCell>

@@ -83,19 +83,19 @@ Last Payment: ${format(new Date(data.lastPaymentDate), "MMM dd, yyyy")}`;
   if (!isClient) return null;
 
   return (
-    <div className="grid gap-6 md:grid-cols-2">
-      <Card className="col-span-2 shadow-lg transition-all duration-300 hover:shadow-xl">
+    <div className="grid gap-6">
+      <Card className="shadow-lg transition-all duration-300 hover:shadow-xl">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="flex items-center">
             <ChartPie className="h-5 w-5 mr-2" />
             <span>Loan Summary</span>
           </CardTitle>
           <div className="flex space-x-2">
-            <Button variant="outline" size="sm" onClick={handleShare}>
+            <Button variant="outline" size="sm" onClick={handleShare} className="h-8">
               <Share className="h-4 w-4 mr-1" />
               <span className="hidden sm:inline">Share</span>
             </Button>
-            <Button variant="outline" size="sm" onClick={handleDownload}>
+            <Button variant="outline" size="sm" onClick={handleDownload} className="h-8">
               <Download className="h-4 w-4 mr-1" />
               <span className="hidden sm:inline">Download</span>
             </Button>
@@ -103,7 +103,7 @@ Last Payment: ${format(new Date(data.lastPaymentDate), "MMM dd, yyyy")}`;
         </CardHeader>
         
         <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
             <SummaryCard
               title="EMI"
               value={formatCurrency(data.emi)}
@@ -224,10 +224,10 @@ interface SummaryCardProps {
 }
 
 const SummaryCard = ({ title, value, description, icon, color, textColor }: SummaryCardProps) => (
-  <div className={`rounded-xl p-4 flex flex-col items-center transition-all duration-300 hover:scale-105 ${color}`}>
-    <span className="text-2xl mb-2">{icon}</span>
-    <h3 className="font-semibold text-center">{title}</h3>
-    <p className={`text-lg font-bold ${textColor}`}>{value}</p>
+  <div className={`rounded-xl p-3 flex flex-col items-center transition-all duration-300 hover:scale-102 ${color}`}>
+    <span className="text-xl md:text-2xl mb-1 md:mb-2">{icon}</span>
+    <h3 className="font-semibold text-center text-sm md:text-base">{title}</h3>
+    <p className={`text-md md:text-lg font-bold ${textColor} text-center break-all`}>{value}</p>
     <p className="text-xs text-center text-muted-foreground mt-1">{description}</p>
   </div>
 );
@@ -239,7 +239,7 @@ interface DetailRowProps {
 }
 
 const DetailRow = ({ label, value, tooltip }: DetailRowProps) => (
-  <div className="flex justify-between items-center py-1.5 border-b border-border">
+  <div className="flex flex-wrap justify-between items-center py-1.5 border-b border-border">
     <div className="flex items-center gap-1">
       <span>{label}</span>
       {tooltip && (
