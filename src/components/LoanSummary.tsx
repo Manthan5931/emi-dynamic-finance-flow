@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { format } from "date-fns";
-import { ChartPie, CircleInfo, Download, Share } from "lucide-react";
+import { ChartPie, CircleIcon, Download, Share } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { 
@@ -246,7 +246,7 @@ const DetailRow = ({ label, value, tooltip }: DetailRowProps) => (
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <CircleInfo className="h-3.5 w-3.5 text-muted-foreground cursor-help" />
+              <CircleIcon className="h-3.5 w-3.5 text-muted-foreground cursor-help" />
             </TooltipTrigger>
             <TooltipContent>
               <p className="max-w-xs">{tooltip}</p>
