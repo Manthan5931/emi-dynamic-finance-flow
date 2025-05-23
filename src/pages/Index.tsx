@@ -14,10 +14,29 @@ import FAQ from "@/components/FAQ";
 import LoanTips from "@/components/LoanTips";
 import { Calculator } from "lucide-react";
 
-export default function Index() {
-  const [calculationResults, setCalculationResults] = useState<any>(null);
+// Define types based on what the components expect
+interface CalculationResults {
+  loanAmount: number;
+  interestRate: number;
+  loanTerm: number;
+  emi: number;
+  totalPayment: number;
+  totalInterest: number;
+  startDate: Date;
+  schedule: Array<{
+    month: number;
+    date: Date;
+    emi: number;
+    principal: number;
+    interest: number;
+    balance: number;
+  }>;
+}
 
-  const handleCalculationComplete = (results: any) => {
+export default function Index() {
+  const [calculationResults, setCalculationResults] = useState<CalculationResults | null>(null);
+
+  const handleCalculationComplete = (results: CalculationResults) => {
     setCalculationResults(results);
   };
 
