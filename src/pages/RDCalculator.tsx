@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Banknote } from "lucide-react";
 import CalculatorNavigation from "@/components/CalculatorNavigation";
 import RDCalculator from "@/components/RDCalculator";
+import RDCharts from "@/components/RDCharts";
 
 const RDCalculatorPage = () => {
   const [calculationResults, setCalculationResults] = useState<any>(null);
@@ -85,6 +86,10 @@ const RDCalculatorPage = () => {
           </div>
         </div>
       </div>
+
+      {calculationResults && (
+        <RDCharts results={calculationResults} />
+      )}
     </div>
   );
 };

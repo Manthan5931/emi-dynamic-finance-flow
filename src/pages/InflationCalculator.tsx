@@ -3,6 +3,7 @@ import { useState } from "react";
 import { TrendingDown } from "lucide-react";
 import CalculatorNavigation from "@/components/CalculatorNavigation";
 import InflationCalculator from "@/components/InflationCalculator";
+import InflationCharts from "@/components/InflationCharts";
 
 const InflationCalculatorPage = () => {
   const [calculationResults, setCalculationResults] = useState<any>(null);
@@ -86,6 +87,10 @@ const InflationCalculatorPage = () => {
           </div>
         </div>
       </div>
+
+      {calculationResults && (
+        <InflationCharts results={calculationResults} />
+      )}
     </div>
   );
 };

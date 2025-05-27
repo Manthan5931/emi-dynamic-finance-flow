@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import CalculatorNavigation from "@/components/CalculatorNavigation";
+import RetirementCharts from "@/components/RetirementCharts";
 
 const formSchema = z.object({
   currentAge: z.preprocess(
@@ -289,6 +289,10 @@ const RetirementCalculatorPage = () => {
           </div>
         </div>
       </div>
+
+      {calculationResults && (
+        <RetirementCharts results={calculationResults} />
+      )}
     </div>
   );
 };
