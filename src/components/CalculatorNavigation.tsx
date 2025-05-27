@@ -22,7 +22,7 @@ import {
 } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 import { cn } from "@/lib/utils";
-import Separator from "@/components/ui/separator";
+import { Separator } from "@/components/ui/separator";
 
 const calculatorCategories = [
   {
