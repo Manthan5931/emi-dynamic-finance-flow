@@ -1,11 +1,8 @@
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { ArrowLeft, BarChart3 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
+import { BarChart3 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import ThemeToggle from "@/components/ThemeToggle";
+import CalculatorNavigation from "@/components/CalculatorNavigation";
 import SIPCalculator from "@/components/SIPCalculator";
 import SIPSummary from "@/components/SIPSummary";
 import SIPSchedule from "@/components/SIPSchedule";
@@ -24,34 +21,8 @@ const SIPCalculatorPage = () => {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">
-      <div className="flex items-center justify-between mb-8">
-        <div className="flex items-center gap-2">
-          <Link to="/">
-            <Button variant="outline" size="icon" className="rounded-full">
-              <ArrowLeft className="h-4 w-4" />
-              <span className="sr-only">Back</span>
-            </Button>
-          </Link>
-          <h1 className="text-2xl sm:text-3xl font-bold">SIP Calculator</h1>
-        </div>
-        <div className="flex items-center gap-2">
-          <Link to="/">
-            <Button variant="outline" size="sm">
-              EMI Calculator
-            </Button>
-          </Link>
-          <Link to="/fd-calculator">
-            <Button variant="outline" size="sm">
-              FD Calculator
-            </Button>
-          </Link>
-          <Link to="/lumpsum-calculator">
-            <Button variant="outline" size="sm">
-              Lumpsum Calculator
-            </Button>
-          </Link>
-          <ThemeToggle />
-        </div>
+      <div className="mb-8 p-4 border-b">
+        <CalculatorNavigation />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-10">

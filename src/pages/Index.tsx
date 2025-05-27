@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -8,10 +7,10 @@ import LoanCalculator from "@/components/LoanCalculator";
 import LoanSummary from "@/components/LoanSummary";
 import EMISchedule from "@/components/EMISchedule";
 import LoanCharts from "@/components/LoanCharts";
-import ThemeToggle from "@/components/ThemeToggle";
 import Features from "@/components/Features";
 import FAQ from "@/components/FAQ";
 import LoanTips from "@/components/LoanTips";
+import CalculatorNavigation from "@/components/CalculatorNavigation";
 import { Calculator } from "lucide-react";
 
 // Define types based on what the components expect
@@ -49,26 +48,8 @@ export default function Index() {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="text-2xl sm:text-3xl font-bold">EMI Calculator</h1>
-        <div className="flex items-center gap-2">
-          <Link to="/sip-calculator">
-            <Button variant="outline" size="sm">
-              SIP Calculator
-            </Button>
-          </Link>
-          <Link to="/fd-calculator">
-            <Button variant="outline" size="sm">
-              FD Calculator
-            </Button>
-          </Link>
-          <Link to="/lumpsum-calculator">
-            <Button variant="outline" size="sm">
-              Lumpsum Calculator
-            </Button>
-          </Link>
-          <ThemeToggle />
-        </div>
+      <div className="mb-8 p-4 border-b">
+        <CalculatorNavigation />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-10">

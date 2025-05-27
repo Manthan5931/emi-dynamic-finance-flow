@@ -1,10 +1,7 @@
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { ArrowLeft, Landmark } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import ThemeToggle from "@/components/ThemeToggle";
+import { Landmark } from "lucide-react";
+import CalculatorNavigation from "@/components/CalculatorNavigation";
 import FDCalculator from "@/components/FDCalculator";
 
 const FDCalculatorPage = () => {
@@ -25,29 +22,8 @@ const FDCalculatorPage = () => {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">
-      <div className="flex items-center justify-between mb-8">
-        <div className="flex items-center gap-2">
-          <Link to="/">
-            <Button variant="outline" size="icon" className="rounded-full">
-              <ArrowLeft className="h-4 w-4" />
-              <span className="sr-only">Back</span>
-            </Button>
-          </Link>
-          <h1 className="text-2xl sm:text-3xl font-bold">FD Calculator</h1>
-        </div>
-        <div className="flex items-center gap-2">
-          <Link to="/">
-            <Button variant="outline" size="sm">
-              EMI Calculator
-            </Button>
-          </Link>
-          <Link to="/sip-calculator">
-            <Button variant="outline" size="sm">
-              SIP Calculator
-            </Button>
-          </Link>
-          <ThemeToggle />
-        </div>
+      <div className="mb-8 p-4 border-b">
+        <CalculatorNavigation />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-10">
