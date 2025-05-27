@@ -18,18 +18,25 @@ import { Calculator } from "lucide-react";
 interface CalculationResults {
   loanAmount: number;
   interestRate: number;
-  loanTerm: number;
+  loanTenure: number;
   emi: number;
-  totalPayment: number;
+  totalAmount: number;
   totalInterest: number;
+  totalPrepayment: number;
   startDate: Date;
+  lastPaymentDate: string;
   schedule: Array<{
     month: number;
-    date: Date;
+    date: string;
+    rawDate: Date;
+    principalPayment: number;
+    interestPayment: number;
     emi: number;
-    principal: number;
-    interest: number;
+    prepayment: number;
+    totalPayment: number;
+    principalPaid: number;
     balance: number;
+    interestRate: number;
   }>;
 }
 
@@ -72,7 +79,7 @@ export default function Index() {
                   <TabsTrigger value="charts">Charts</TabsTrigger>
                 </TabsList>
                 <TabsContent value="summary">
-                  <LoanSummary results={calculationResults} />
+                  <LoanSummary data={calculationResults} />
                 </TabsContent>
                 <TabsContent value="schedule">
                   <EMISchedule schedule={calculationResults.schedule} />
