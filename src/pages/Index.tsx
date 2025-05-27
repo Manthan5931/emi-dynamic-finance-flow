@@ -82,7 +82,7 @@ export default function Index() {
                   <LoanSummary data={calculationResults} />
                 </TabsContent>
                 <TabsContent value="schedule">
-                  <EMISchedule schedule={calculationResults.schedule} />
+                  <EMISchedule data={calculationResults} />
                 </TabsContent>
                 <TabsContent value="charts">
                   <LoanCharts results={calculationResults} />
