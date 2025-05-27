@@ -40,6 +40,16 @@ const SIPCalculatorPage = () => {
               EMI Calculator
             </Button>
           </Link>
+          <Link to="/fd-calculator">
+            <Button variant="outline" size="sm">
+              FD Calculator
+            </Button>
+          </Link>
+          <Link to="/lumpsum-calculator">
+            <Button variant="outline" size="sm">
+              Lumpsum Calculator
+            </Button>
+          </Link>
           <ThemeToggle />
         </div>
       </div>

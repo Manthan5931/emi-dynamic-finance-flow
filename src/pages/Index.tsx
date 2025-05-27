@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -54,6 +55,16 @@ export default function Index() {
           <Link to="/sip-calculator">
             <Button variant="outline" size="sm">
               SIP Calculator
+            </Button>
+          </Link>
+          <Link to="/fd-calculator">
+            <Button variant="outline" size="sm">
+              FD Calculator
+            </Button>
+          </Link>
+          <Link to="/lumpsum-calculator">
+            <Button variant="outline" size="sm">
+              Lumpsum Calculator
             </Button>
           </Link>
           <ThemeToggle />
