@@ -20,8 +20,8 @@ const formSchema = z.object({
   timePeriod: z.preprocess(
     (val) => (val === "" ? undefined : Number(val)),
     z.number().min(1, { message: "Time period must be at least 1 year" }).max(50, { message: "Time period cannot exceed 50 years" })
-  ),
-);
+  )
+});
 
 type InflationFormValues = z.infer<typeof formSchema>;
 
@@ -43,7 +43,7 @@ const InflationCalculator = ({ onCalculationComplete }: InflationCalculatorProps
     const rate = inflationRate / 100;
     const futureValue = currentAmount * Math.pow(1 + rate, years);
     const purchasingPowerLoss = futureValue - currentAmount;
-    const realValue = currentAmount; // Current purchasing power
+    const realValue = currentAmount;
     
     return {
       currentAmount,
@@ -85,7 +85,7 @@ const InflationCalculator = ({ onCalculationComplete }: InflationCalculatorProps
                       type="number" 
                       {...field} 
                       onChange={(e) => field.onChange(e.target.valueAsNumber || "")}
-                      className="bg-background"
+                      className="bg-background dark:bg-gray-800 border-gray-300 dark:border-gray-600"
                     />
                   </FormControl>
                   <FormMessage />
@@ -105,7 +105,7 @@ const InflationCalculator = ({ onCalculationComplete }: InflationCalculatorProps
                       step="0.1" 
                       {...field} 
                       onChange={(e) => field.onChange(e.target.valueAsNumber || "")}
-                      className="bg-background"
+                      className="bg-background dark:bg-gray-800 border-gray-300 dark:border-gray-600"
                     />
                   </FormControl>
                   <FormMessage />
@@ -124,7 +124,7 @@ const InflationCalculator = ({ onCalculationComplete }: InflationCalculatorProps
                       type="number" 
                       {...field} 
                       onChange={(e) => field.onChange(e.target.valueAsNumber || "")}
-                      className="bg-background"
+                      className="bg-background dark:bg-gray-800 border-gray-300 dark:border-gray-600"
                     />
                   </FormControl>
                   <FormMessage />
