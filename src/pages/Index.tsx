@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -85,7 +84,7 @@ export default function Index() {
                   <EMISchedule data={calculationResults} />
                 </TabsContent>
                 <TabsContent value="charts">
-                  <LoanCharts results={calculationResults} />
+                  <LoanCharts data={calculationResults} />
                 </TabsContent>
               </Tabs>
             ) : (
