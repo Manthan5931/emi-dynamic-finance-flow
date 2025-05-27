@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Target } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import CalculatorNavigation from "@/components/CalculatorNavigation";
 
 const RetirementCalculatorPage = () => {
@@ -23,23 +24,23 @@ const RetirementCalculatorPage = () => {
             <div className="space-y-4">
               <div>
                 <label className="text-sm font-medium">Current Age</label>
-                <input className="w-full mt-1 p-2 border rounded" placeholder="30" />
+                <Input className="w-full mt-1" placeholder="30" />
               </div>
               <div>
                 <label className="text-sm font-medium">Retirement Age</label>
-                <input className="w-full mt-1 p-2 border rounded" placeholder="60" />
+                <Input className="w-full mt-1" placeholder="60" />
               </div>
               <div>
                 <label className="text-sm font-medium">Current Monthly Expenses</label>
-                <input className="w-full mt-1 p-2 border rounded" placeholder="₹50,000" />
+                <Input className="w-full mt-1" placeholder="₹50,000" />
               </div>
               <div>
                 <label className="text-sm font-medium">Expected Return (% p.a.)</label>
-                <input className="w-full mt-1 p-2 border rounded" placeholder="12%" />
+                <Input className="w-full mt-1" placeholder="12%" />
               </div>
               <div>
                 <label className="text-sm font-medium">Inflation Rate (% p.a.)</label>
-                <input className="w-full mt-1 p-2 border rounded" placeholder="6%" />
+                <Input className="w-full mt-1" placeholder="6%" />
               </div>
               <Button className="w-full">Calculate Retirement Corpus</Button>
             </div>

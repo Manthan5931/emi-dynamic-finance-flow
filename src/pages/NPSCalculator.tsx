@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import CalculatorNavigation from "@/components/CalculatorNavigation";
 
 const NPSCalculatorPage = () => {
@@ -23,19 +24,19 @@ const NPSCalculatorPage = () => {
             <div className="space-y-4">
               <div>
                 <label className="text-sm font-medium">Current Age</label>
-                <input className="w-full mt-1 p-2 border rounded" placeholder="30" />
+                <Input className="w-full mt-1" placeholder="30" />
               </div>
               <div>
                 <label className="text-sm font-medium">Monthly Contribution</label>
-                <input className="w-full mt-1 p-2 border rounded" placeholder="₹5,000" />
+                <Input className="w-full mt-1" placeholder="₹5,000" />
               </div>
               <div>
                 <label className="text-sm font-medium">Expected Annual Return</label>
-                <input className="w-full mt-1 p-2 border rounded" placeholder="10%" />
+                <Input className="w-full mt-1" placeholder="10%" />
               </div>
               <div>
                 <label className="text-sm font-medium">Annuity Rate</label>
-                <input className="w-full mt-1 p-2 border rounded" placeholder="6%" />
+                <Input className="w-full mt-1" placeholder="6%" />
               </div>
               <Button className="w-full">Calculate NPS Returns</Button>
             </div>

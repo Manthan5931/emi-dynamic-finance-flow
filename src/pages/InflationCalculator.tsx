@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { TrendingDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import CalculatorNavigation from "@/components/CalculatorNavigation";
 
 const InflationCalculatorPage = () => {
@@ -23,15 +24,15 @@ const InflationCalculatorPage = () => {
             <div className="space-y-4">
               <div>
                 <label className="text-sm font-medium">Current Amount</label>
-                <input className="w-full mt-1 p-2 border rounded" placeholder="₹1,00,000" />
+                <Input className="w-full mt-1" placeholder="₹1,00,000" />
               </div>
               <div>
                 <label className="text-sm font-medium">Inflation Rate (% p.a.)</label>
-                <input className="w-full mt-1 p-2 border rounded" placeholder="6%" />
+                <Input className="w-full mt-1" placeholder="6%" />
               </div>
               <div>
                 <label className="text-sm font-medium">Time Period (Years)</label>
-                <input className="w-full mt-1 p-2 border rounded" placeholder="10" />
+                <Input className="w-full mt-1" placeholder="10" />
               </div>
               <Button className="w-full">Calculate Future Value</Button>
             </div>

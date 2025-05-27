@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import CalculatorNavigation from "@/components/CalculatorNavigation";
 
 const PPFCalculatorPage = () => {
@@ -23,20 +25,25 @@ const PPFCalculatorPage = () => {
             <div className="space-y-4">
               <div>
                 <label className="text-sm font-medium">Annual Investment</label>
-                <input className="w-full mt-1 p-2 border rounded" placeholder="₹1,50,000" />
+                <Input className="w-full mt-1" placeholder="₹1,50,000" />
               </div>
               <div>
                 <label className="text-sm font-medium">Current PPF Interest Rate</label>
-                <input className="w-full mt-1 p-2 border rounded" placeholder="7.1%" />
+                <Input className="w-full mt-1" placeholder="7.1%" />
               </div>
               <div>
                 <label className="text-sm font-medium">Investment Period</label>
-                <select className="w-full mt-1 p-2 border rounded">
-                  <option>15 years (minimum)</option>
-                  <option>20 years</option>
-                  <option>25 years</option>
-                  <option>30 years</option>
-                </select>
+                <Select>
+                  <SelectTrigger className="w-full mt-1">
+                    <SelectValue placeholder="15 years (minimum)" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="15">15 years (minimum)</SelectItem>
+                    <SelectItem value="20">20 years</SelectItem>
+                    <SelectItem value="25">25 years</SelectItem>
+                    <SelectItem value="30">30 years</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
               <Button className="w-full">Calculate PPF Returns</Button>
             </div>

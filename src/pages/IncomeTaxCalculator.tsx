@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { Receipt } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import CalculatorNavigation from "@/components/CalculatorNavigation";
 
 const IncomeTaxCalculatorPage = () => {
@@ -23,22 +25,27 @@ const IncomeTaxCalculatorPage = () => {
             <div className="space-y-4">
               <div>
                 <label className="text-sm font-medium">Tax Regime</label>
-                <select className="w-full mt-1 p-2 border rounded">
-                  <option>Old Tax Regime</option>
-                  <option>New Tax Regime</option>
-                </select>
+                <Select>
+                  <SelectTrigger className="w-full mt-1">
+                    <SelectValue placeholder="Old Tax Regime" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="old">Old Tax Regime</SelectItem>
+                    <SelectItem value="new">New Tax Regime</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
               <div>
                 <label className="text-sm font-medium">Annual Income</label>
-                <input className="w-full mt-1 p-2 border rounded" placeholder="₹10,00,000" />
+                <Input className="w-full mt-1" placeholder="₹10,00,000" />
               </div>
               <div>
                 <label className="text-sm font-medium">80C Deductions</label>
-                <input className="w-full mt-1 p-2 border rounded" placeholder="₹1,50,000" />
+                <Input className="w-full mt-1" placeholder="₹1,50,000" />
               </div>
               <div>
                 <label className="text-sm font-medium">Other Deductions</label>
-                <input className="w-full mt-1 p-2 border rounded" placeholder="₹50,000" />
+                <Input className="w-full mt-1" placeholder="₹50,000" />
               </div>
               <Button className="w-full">Calculate Tax</Button>
             </div>

@@ -1,24 +1,12 @@
 
 import { useState } from "react";
-import { ArrowLeft, Banknote } from "lucide-react";
+import { Banknote } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import CalculatorNavigation from "@/components/CalculatorNavigation";
 
 const RDCalculatorPage = () => {
   const [calculationResults, setCalculationResults] = useState<any>(null);
-
-  const handleCalculationComplete = (results: any) => {
-    setCalculationResults(results);
-    console.log("RD Calculation results:", results);
-  };
-
-  const formatCurrency = (amount: number): string => {
-    return new Intl.NumberFormat("en-IN", {
-      style: "currency",
-      currency: "INR",
-      maximumFractionDigits: 0,
-    }).format(amount);
-  };
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">
@@ -33,19 +21,18 @@ const RDCalculatorPage = () => {
             <p className="text-sm text-muted-foreground mb-4">
               Calculate returns on your Recurring Deposit with monthly contributions
             </p>
-            {/* RD Calculator component would go here */}
             <div className="space-y-4">
               <div>
                 <label className="text-sm font-medium">Monthly Deposit Amount</label>
-                <input className="w-full mt-1 p-2 border rounded" placeholder="₹5,000" />
+                <Input className="w-full mt-1" placeholder="₹5,000" />
               </div>
               <div>
                 <label className="text-sm font-medium">Interest Rate (% p.a.)</label>
-                <input className="w-full mt-1 p-2 border rounded" placeholder="6.5" />
+                <Input className="w-full mt-1" placeholder="6.5" />
               </div>
               <div>
-                <label className="text-sm font-medium">Time Period</label>
-                <input className="w-full mt-1 p-2 border rounded" placeholder="5 years" />
+                <label className="text-sm font-medium">Time Period (Years)</label>
+                <Input className="w-full mt-1" placeholder="5" />
               </div>
               <Button className="w-full">Calculate RD Returns</Button>
             </div>

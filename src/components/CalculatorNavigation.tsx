@@ -1,4 +1,3 @@
-
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { 
@@ -23,6 +22,7 @@ import {
 } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 import { cn } from "@/lib/utils";
+import Separator from "@/components/ui/separator";
 
 const calculatorCategories = [
   {
@@ -57,10 +57,16 @@ const CalculatorNavigation = () => {
 
   return (
     <div className="flex items-center justify-between w-full">
-      <Link to="/" className="flex items-center gap-2 font-bold text-xl">
-        <Calculator className="h-6 w-6" />
-        FinCalc
-      </Link>
+      <div className="flex items-center gap-4">
+        <Link to="/home" className="flex items-center gap-2 font-bold text-xl hover:text-primary transition-colors">
+          <Calculator className="h-6 w-6" />
+          FinCalc
+        </Link>
+        <Separator orientation="vertical" className="h-6" />
+        <Link to="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+          EMI Calculator
+        </Link>
+      </div>
       
       <div className="hidden lg:flex items-center gap-4">
         <NavigationMenu>
